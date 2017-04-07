@@ -80,7 +80,7 @@ class WebAPI {
     	"510" => "Not Extended",
     	"511" => "Network Authentication Required",
     	"598" => "Network read timeout error",
-    	"599" => "Network connect timeout error",
+    	"599" => "Network connect timeout error"
 	);
 
     public $response = array(
@@ -169,7 +169,7 @@ class WebAPI {
 
 	private function footer($a){
 		return function (){
-			// $this->output = ob_get_clean();
+			$this->output = ob_get_clean();
 			if($this->results){
 				$this->response['results'] = $this->results;
 			}
@@ -177,7 +177,6 @@ class WebAPI {
 			echo json_encode( $this->response, JSON_PRETTY_PRINT | JSON_HEX_QUOT | JSON_HEX_TAG );
 		};
 	}
-
 
 	public function setRequiredParams(){
 		$parameters = func_get_args();
@@ -213,5 +212,6 @@ class WebAPI {
 			self::throwError('This API requires: '.(count($collect_required_fields)>=1?implode(', ', $collect_required_fields).' and ':'').$temp.' paramaters', 412 );
 		}
 	}
+
 }
 ?>
